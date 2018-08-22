@@ -1,0 +1,24 @@
+{
+  "name": "hl2030",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ritley/core": "^0.3.3",
+    "@ritley/standalone-adapter": "^0.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/node": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.55",
+    "@babel/plugin-proposal-decorators": "^7.0.0-beta.55",
+    "@babel/plugin-transform-async-to-generator": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-beta.55"
+  }
+}
