@@ -1,20 +1,22 @@
 import { AbstractResource } from "@ritley/core";
-import DataService from "../services/database.service";
+import UserModel from "../models/user.model";
 
-import { Dependency, ReqTransformBodySync } from "@ritley/decorators";
+import { Dependency, ReqTransformBodyAsync } from "@ritley/decorators";
 
-@Dependency("database", DataService)
+@Dependency("userModel", UserModel)
 export default class UserResource extends AbstractResource {
-  constructor(_database) {
+  constructor() {
     super("/users");
   }
 
-  @ReqTransformBodySync
-  post(req, res) {
-    const payload = req.body.toJSON();
-    this.database.create("users", payload).then(user => {
-      res.statusCode = 200;
-      res.end(JSON.stringify(user));
-    });
+  @ReqTransformBodyAsync
+  async post(req, res) {
+    const body = await req.body;
+    const payload = body.toJSON();
+    await this.userModel.validate(payload);
+    await this.userModel.isUnique(payload);
+    const user = await this.userModel.create(payload);
+    res.statusCode = 200;
+    res.end(JSON.stringify(user));
   }
 }
