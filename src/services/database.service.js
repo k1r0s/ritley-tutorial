@@ -1,9 +1,12 @@
 import low from "lowdb";
 import FileAsync from "lowdb/adapters/FileAsync";
-import config from "./database.config";
 import shortid from "shortid";
+import config from "../config/database.config";
 
-export default class DataBase {
+import { Provider } from "@ritley/decorators";
+
+@Provider.singleton
+export default class DataService {
   onConnected = undefined
 
   constructor() {
