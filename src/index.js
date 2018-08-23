@@ -1,5 +1,6 @@
 import { setAdapter, AbstractResource } from "@ritley/core";
 import Adapter from "@ritley/standalone-adapter";
+import DataBase from "./database.service";
 
 setAdapter(Adapter, {
   "port": 8080
@@ -17,15 +18,18 @@ class SessionResource extends AbstractResource {
 }
 
 class UserResource extends AbstractResource {
-  constructor() {
+  constructor(_database) {
     super("/users");
+    this.database = _database;
   }
 
-  get(req, res) {
-    res.statusCode = 200;
-    res.end("Hello from users!");
+  post(req, res) {
+    this.database.create("users", { name: "Jimmy Jazz" }).then(user => {
+      res.statusCode = 200;
+      res.end(JSON.stringify(user));
+    });
   }
 }
 
 new SessionResource;
-new UserResource;
+new UserResource(new DataBase);

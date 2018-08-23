@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@ritley/core": "^0.3.3",
-    "@ritley/standalone-adapter": "^0.2.0"
+    "@ritley/standalone-adapter": "^0.2.0",
+    "lowdb": "^1.0.0",
+    "shortid": "^2.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",
