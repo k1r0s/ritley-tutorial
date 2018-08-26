@@ -46,6 +46,10 @@ export default class UserModel {
   update(uid, { mail, name }) {
     return this.database.update("users", { uid }, { mail, name });
   }
+
+  postUser(payload) {
+    return this.validate(payload).then(() => this.isUnique(payload).then(() => this.create(payload)));
+  }
 }
 
 export class UserValidationError extends Error {
