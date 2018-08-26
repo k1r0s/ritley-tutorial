@@ -1,17 +1,19 @@
 import { AbstractResource } from "@ritley/core";
-import UserModel, { UserValidationError, UserMailInUseError } from "../models/user.model";
+import UserModel, { UserValidationError, UserMailInUseError, UserInsufficientPermError } from "../models/user.model";
 import SessionModel, { SessionNotCreatedError, SessionExpiredError } from "../models/session.model";
 import ParseReqBody from "../decorators/req-body-json.decorator";
 import ValidateSession from "../decorators/validate-session.decorator";
 
 
 import {
+  ReqTransformQuery,
   Dependency,
   Default,
   Throws,
   BadRequest,
   Conflict,
   Created,
+  Forbidden,
   Ok
 } from "@ritley/decorators";
 
@@ -27,6 +29,15 @@ export default class UserResource extends AbstractResource {
   @ParseReqBody
   post(req, res, payload) {
     return this.userModel.postUser(payload);
+  }
+
+  @Throws(UserInsufficientPermError, Forbidden)
+  @Default(Ok)
+  @ReqTransformQuery
+  @ValidateSession
+  @ParseReqBody
+  put(req, res, session, payload) {
+    return this.userModel.putUser(req.query.uid, session.userUid, payload);
   }
 
   @Default(Ok)
