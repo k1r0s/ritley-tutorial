@@ -17,7 +17,7 @@ export default class UserModel {
     if(requiredProps.every(prop => props.includes(prop))) {
       return Promise.resolve();
     } else {
-      throw new UserValidationError
+      return Promise.reject(new UserValidationError);
     }
   }
 

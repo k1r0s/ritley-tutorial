@@ -1,5 +1,11 @@
 {
-  "sessions": [],
+  "sessions": [
+    {
+      "uid": "SY09e587g",
+      "expiration": 1535663517217,
+      "userUid": "1ywRUmDWy"
+    }
+  ],
   "users": [
     {
       "uid": "_gXUVVF6z",
@@ -14,6 +20,12 @@
       "mail": "gt@test.net",
       "name": "Genoveva Thillet",
       "pass": "92fca2fc53414b3f12c765d22c51873e285f43c19a8596505c3251c1308214be2709dbf4906c2068632575fb1f28dc2dwLGIJ1YbTMVYwUq6u/+8hA=="
+    },
+    {
+      "uid": "xqR16Gi7w",
+      "name": "Norman Tuner",
+      "mail": "nt@foo.b",
+      "pass": "3e12a12b6e76895eb23542e6eec2bc60df2ad8d4b771de465ef5b62073ebafd739ca2358bc2d2b7a017e9f74b4389417SdDADGTbEVRAdKnUD7EatQ=="
     }
   ]
 }
