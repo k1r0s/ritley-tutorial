@@ -2,7 +2,6 @@ import DataService from "../services/database.service";
 import EncryptService from "../services/encrypt.service";
 import { Provider, Dependency } from "@ritley/decorators";
 
-
 @Provider.factory
 @Dependency("database", DataService)
 @Dependency("encrypt", EncryptService)
@@ -18,7 +17,7 @@ export default class UserModel {
     if(requiredProps.every(prop => props.includes(prop))) {
       return Promise.resolve();
     } else {
-      return Promise.reject();
+      return Promise.reject(new UserValidationError);
     }
   }
 
@@ -29,7 +28,7 @@ export default class UserModel {
 
   isUnique({ mail }) {
     return new Promise((resolve, reject) =>
-      this.database.exists("users", { mail }).then(reject, resolve));
+      this.database.exists("users", { mail }).then(() => reject(new UserMailInUseError), resolve));
   }
 
   searchBy(predicate) {
@@ -46,5 +45,17 @@ export default class UserModel {
 
   update(uid, { mail, name }) {
     return this.database.update("users", { uid }, { mail, name });
+  }
+}
+
+export class UserValidationError extends Error {
+  constructor() {
+    super("missing fields, required: [name, mail, pass]")
+  }
+}
+
+export class UserMailInUseError extends Error {
+  constructor() {
+    super("mail is already taken, try another one")
   }
 }
