@@ -29,6 +29,10 @@ export default class SessionModel {
 
   static hasSessionExpired = session => session.expiration < Date.now();
 
+  postSession(payload) {
+    return this.validateCredentials(payload).then(user => this.upsertSession(user));
+  }
+
   validateCredentials({ mail, pass }) {
     return new Promise((resolve, reject) => {
       this.database

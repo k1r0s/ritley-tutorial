@@ -1,5 +1,6 @@
 import { AbstractResource } from "@ritley/core";
 import SessionModel, { SessionInvalidCredentialsError } from "../models/session.model";
+import ParseReqBody from "../decorators/req-body-json.decorator";
 
 import {
   Default,
@@ -7,9 +8,7 @@ import {
   Created,
   Throws,
   Unauthorized,
-  BadRequest,
-  Dependency,
-  ReqTransformBodyAsync
+  Dependency
 } from "@ritley/decorators";
 
 
@@ -25,14 +24,10 @@ export default class SessionResource extends AbstractResource {
     super(SessionResource.URI);
   }
 
-  @Throws(SyntaxError, BadRequest)
   @Throws(SessionInvalidCredentialsError, Unauthorized)
   @Default(Created)
-  @ReqTransformBodyAsync
-  async post(req) {
-    const body = await req.body;
-    const payload = body.toJSON();
-    const user = await this.sessionModel.validateCredentials(payload);
-    return this.sessionModel.upsertSession(user);
+  @ParseReqBody
+  post(req, res, payload) {
+    return this.sessionModel.postSession(payload);
   }
 }
