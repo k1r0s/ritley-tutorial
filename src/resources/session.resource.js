@@ -18,15 +18,13 @@ export default class SessionResource extends AbstractResource {
   @Default(MethodNotAllowed) put() {}
   @Default(MethodNotAllowed) delete() {}
 
-  static URI = "/sessions";
-
   constructor() {
-    super(SessionResource.URI);
+    super("/sessions");
   }
 
   @Throws(SessionInvalidCredentialsError, Unauthorized)
-  @Default(Created)
   @ParseReqBody
+  @Default(Created)
   post(req, res, payload) {
     return this.sessionModel.postSession(payload);
   }

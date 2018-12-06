@@ -9,8 +9,8 @@ export default class QueryService {
   }
 
   buildStatement(expression) {
-    const reg = /(.{0,2}),(.+),(.+)/
-    const [match, cmd, prop, val] = reg.exec(expression);
+    const reg = /(.+),(.{0,2}),(.+)/
+    const [match, prop, cmd, val] = reg.exec(expression);
     switch (cmd) {
       case "eq":
         return `sub['${prop}'] === '${val}'`;

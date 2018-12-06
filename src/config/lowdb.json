@@ -1,28 +1,29 @@
 {
   "sessions": [
     {
-      "uid": "h9Rca8rfs",
-      "expiration": 1535669450804,
-      "userUid": "Fq4rtMrYa"
+      "uid": "LaRKi0DfT",
+      "expiration": 1544114937200,
+      "userUid": "ZpIzfjhqb"
     }
   ],
   "users": [
     {
-      "uid": "XZfY66U-G",
+      "uid": "WYV7a-jn-",
       "name": "Randell Kovalsky",
       "mail": "rk@foo.b",
-      "pass": "c4712b7fc5ab28f6ccf114babc5754ee463c81ae3f23f5783dd83331f4e5c35c945a5b45bfa471961fbbaf627eef16c7RnFjvmGQJnC7tbiXeCAbPw=="
+      "pass": "2a344a698b44e19a7ca37b0f03ae607456d3e803f26d006975149d9da315914b1204bf58ecff0f7ec9f0e8c7a3fec751WLW20I6XU6IDhwdD7MGCpg=="
     },
     {
-      "uid": "Fq4rtMrYa",
-      "name": "Richie Lanuit",
-      "pass": "ef79ab42b89afe75b36e8f490ce585151f4e2d9344a8593cf2210fd7fd6ea48be61cd97426b62a7b46e9ec739e015388eUVGPvIgjMcnKl2ZcndoJA=="
+      "uid": "ZpIzfjhqb",
+      "pass": "55d15548435c24e6e691e0c136afb136af072dc778b3dea91f9505224cd0479941dfdb7e7e23e316e0bc052bde1112a1rjGzs/iPFJMQCMgKcWRdtA==",
+      "name": "Joana Dark",
+      "mail": "joanad@mailer.net"
     },
     {
-      "uid": "ovCMBZnEd",
+      "uid": "d3b9OXNSc",
       "name": "Norman Tuner",
       "mail": "nt@foo.b",
-      "pass": "463c89f86d296a8892f00cb0fd078d7565548d2bd46e720fe40c4bfef7d3c9585ee57dade4c0f0b60a9bc8b69ad81e56xQwZiYLf+I1oJ9G3B6YxKA=="
+      "pass": "4429a7b32ecea578e4f17c533440dabf5801862d31a549ee6a7fb50bb08b90948bedf7b375d9155df93027aac454d6b9HslT+kxxxRt8hGY0Lsozjw=="
     }
   ]
 }

@@ -9,35 +9,39 @@ import ValidateSession from "../decorators/validate-session.decorator";
 import {
   ReqTransformQuery,
   Dependency,
+  InternalServerError,
   Default,
   Throws,
   BadRequest,
   Conflict,
   Created,
   Forbidden,
-  Ok
+  Ok,
+  MethodNotAllowed
 } from "@ritley/decorators";
 
 @Dependency("userModel", UserModel)
 @Dependency("query", QueryService)
 export default class UserResource extends AbstractResource {
+  @Default(MethodNotAllowed) delete() {}
+
   constructor() {
     super("/users");
   }
 
   @Throws(UserValidationError, BadRequest)
   @Throws(UserMailInUseError, Conflict)
-  @Default(Created)
   @ParseReqBody
+  @Default(Created)
   post(req, res, payload) {
     return this.userModel.postUser(payload);
   }
 
   @Throws(UserInsufficientPermError, Forbidden)
-  @Default(Ok)
   @ReqTransformQuery
   @ValidateSession
   @ParseReqBody
+  @Default(Ok)
   put(req, res, session, payload) {
     return this.userModel.putUser(req.query.uid, session.userUid, payload);
   }

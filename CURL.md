@@ -21,11 +21,11 @@ curl -H "x-session: <session_uid>" localhost:8080/users -v
 
 ```bash
 # starts with name 'Rand'
-curl -H "x-session: <session_uid>" localhost:8080/users?filter=sw,name,Rand -v
+curl -H "x-session: <session_uid>" localhost:8080/users?filter=name,sw,Rand -v
 ```
 
 
 ### edit user
 ```bash
-curl -X PUT -H "x-session: <session_uid>" -d '{ "name": "Joe Strummer"}' localhost:8080/users?uid=<target_user_uid> -v
+curl -X PUT -H "x-session: <session_uid>" -d '{ "name": "Joana Dark"}' localhost:8080/users?uid=<target_user_uid> -v
 ```

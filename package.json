@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ritley/core": "^0.3.3",
-    "@ritley/decorators": "^0.7.1",
+    "@ritley/core": "^0.4.0",
+    "@ritley/decorators": "^0.7.2",
     "@ritley/standalone-adapter": "^0.2.0",
     "cpass": "^2.0.5",
     "lowdb": "^1.0.0",

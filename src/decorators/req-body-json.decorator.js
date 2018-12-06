@@ -6,7 +6,7 @@ import {
 } from "@ritley/decorators";
 
 function parseRequestBody(meta) {
-  const [req, res] = meta.args;
+  const [req, res, session] = meta.args;
   req.body.then(body => {
     try {
       const payload = body.toJSON();

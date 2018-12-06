@@ -2,6 +2,12 @@ import DatabaseService from "../services/database.service";
 import EncryptService from "../services/encrypt.service";
 import { Provider, Dependency } from "@ritley/decorators";
 
+export {
+  SessionNotCreatedError,
+  SessionInvalidCredentialsError,
+  SessionExpiredError
+}
+
 @Provider.factory
 @Dependency("database", DatabaseService)
 @Dependency("encrypt", EncryptService)
@@ -73,19 +79,20 @@ export default class SessionModel {
   }
 }
 
-export class SessionNotCreatedError extends Error {
+
+class SessionNotCreatedError extends Error {
   constructor() {
     super("you need to create a session to perform this action")
   }
 }
 
-export class SessionInvalidCredentialsError extends Error {
+class SessionInvalidCredentialsError extends Error {
   constructor() {
     super("your credentials are invalid")
   }
 }
 
-export class SessionExpiredError extends Error {
+class SessionExpiredError extends Error {
   constructor() {
     super("your session has expired")
   }

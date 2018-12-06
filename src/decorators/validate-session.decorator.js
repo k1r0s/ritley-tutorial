@@ -11,7 +11,7 @@ function authSessionExists(sessionModel) {
     const [req, res] = meta.args;
     const uid = req.headers["x-session"];
     sessionModel.sessionExists({ uid }).then(
-      session => meta.commit(session),
+      meta.commit,
       e => Unauthorized(res, e.message)
     )
   }

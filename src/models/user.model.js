@@ -2,14 +2,20 @@ import DataService from "../services/database.service";
 import EncryptService from "../services/encrypt.service";
 import { Provider, Dependency } from "@ritley/decorators";
 
+export {
+  UserValidationError,
+  UserMailInUseError,
+  UserInsufficientPermError
+}
+
 @Provider.factory
 @Dependency("database", DataService)
 @Dependency("encrypt", EncryptService)
 export default class UserModel {
 
-  static userPublicPredicate = collection => collection.map(({ pass, ...user }) => ({
-    ...user
-  }))
+  static userPublicPredicate = collection => collection.map(({ pass, ...user }) => user);
+
+  static removeForbiddenKeys = ({ id, pass, ...rest }) => rest;
 
   validate(payload) {
     const requiredProps = ["name", "pass", "mail"];
@@ -51,32 +57,35 @@ export default class UserModel {
     }
   }
 
-  update(uid, { mail, name }) {
-    return this.database.update("users", { uid }, { mail, name });
+  update(uid, payload) {
+    return this.database.update("users", { uid }, UserModel.removeForbiddenKeys(payload));
   }
 
-  postUser(payload) {
-    return this.validate(payload).then(() => this.isUnique(payload).then(() => this.create(payload)));
+  async postUser(payload) {
+    await this.validate(payload);
+    await this.isUnique(payload);
+    return this.create(payload);
   }
 
-  putUser(requestedUserUid, currentUserUid, payload) {
-    return this.isAllowedToEdit(requestedUserUid, currentUserUid).then(() => this.update(requestedUserUid, payload));
+  async putUser(requestedUserUid, currentUserUid, payload) {
+    await this.isAllowedToEdit(requestedUserUid, currentUserUid);
+    return this.update(requestedUserUid, payload);
   }
 }
 
-export class UserValidationError extends Error {
+class UserValidationError extends Error {
   constructor() {
     super("missing fields, required: [name, mail, pass]")
   }
 }
 
-export class UserMailInUseError extends Error {
+class UserMailInUseError extends Error {
   constructor() {
     super("mail is already taken, try another one")
   }
 }
 
-export class UserInsufficientPermError extends Error {
+class UserInsufficientPermError extends Error {
   constructor() {
     super("you don't have permissions to perform this action")
   }
